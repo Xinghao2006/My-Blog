@@ -1,86 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
+    <!-- Move these to the very top for scrapers -->
+    <title>My Blog | 记录生活</title>
+    <meta name="description" content="记录生活，以及那些编译通过的瞬间。我的交互工具。">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <!-- Force HTTPS for all resources to avoid Mixed Content security warnings -->
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.xinghaodev.cn/">
+    <meta property="og:title" content="My Blog | 记录生活">
+    <meta property="og:description" content="记录生活，以及那些编译通过的瞬间。我的交互工具。">
+    <meta property="og:image" content="https://p.sda1.dev/30/95715e4c030bb436ea3cb2e380150f33/68f0097f66e974affa6042f56e82a12a.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="My Blog | 记录生活">
+    <meta property="twitter:description" content="记录生活，以及那些编译通过的瞬间。我的交互工具。">
+    <meta property="twitter:image" content="https://p.sda1.dev/30/95715e4c030bb436ea3cb2e380150f33/68f0097f66e974affa6042f56e82a12a.jpg">
+
+    <!-- Schema.org for Google/WeChat -->
+    <meta itemprop="name" content="My Blog | 记录生活">
+    <meta itemprop="description" content="记录生活，以及那些编译通过的瞬间。我的交互工具。">
+    <meta itemprop="image" content="https://p.sda1.dev/30/95715e4c030bb436ea3cb2e380150f33/68f0097f66e974affa6042f56e82a12a.jpg">
+
+    <!-- Force HTTPS -->
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     
-    <!-- SEO & Social Media Tags -->
-    <title>My Blog | 记录生活</title>
-    <meta name="description" content="极简,创意,我的博客">
-
-    <!-- Open Graph & WeChat Share Metadata -->
-    <meta property="og:title" content="My Blog | 记录生活">
-    <meta property="og:description" content="极简,创意,我的博客">
-    <meta property="og:image" content="https://p.sda1.dev/30/95715e4c030bb436ea3cb2e380150f33/68f0097f66e974affa6042f56e82a12a.jpg">
-    <meta property="og:url" content="">
-    <meta property="og:type" content="website">
-    
-    <!-- Use fonts.loli.net (Domestic mirror for Google Fonts) -->
     <link rel="preconnect" href="https://fonts.loli.net">
     <link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
-    <!-- Added Noto Serif SC and Playfair Display for Blog Aesthetic -->
     <link href="https://fonts.loli.net/css2?family=Caveat:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
       @import "tailwindcss/base";
       @import "tailwindcss/components";
       @import "tailwindcss/utilities";
 
-      /* Custom utility for the receipt font */
-      .font-receipt {
-        font-family: 'Courier Prime', 'Courier New', Courier, monospace;
-      }
-      /* Aesthetic handwriting font */
-      .font-handwriting {
-        font-family: 'Caveat', 'Ma Shan Zheng', 'KaiTi', 'STKaiti', '楷体', cursive;
-      }
-      /* Blog Heading Font */
-      .font-serif-title {
-        font-family: 'Playfair Display', 'Noto Serif SC', serif;
-      }
+      .font-receipt { font-family: 'Courier Prime', 'Courier New', Courier, monospace; }
+      .font-handwriting { font-family: 'Caveat', 'Ma Shan Zheng', 'KaiTi', 'STKaiti', '楷体', cursive; }
+      .font-serif-title { font-family: 'Playfair Display', 'Noto Serif SC', serif; }
       
-      /* Hide scrollbar mostly but allow scrolling for blog */
-      body {
-        background-color: #fafaf9; /* stone-50 */
-        color: #1c1917; /* stone-900 */
-        min-height: 100vh;
-      }
+      body { background-color: #fafaf9; color: #1c1917; min-height: 100vh; margin: 0; padding: 0; }
       
-      /* Animations */
       @keyframes print-receipt {
         0% { transform: translateY(-100%); opacity: 0; }
         100% { transform: translateY(0); opacity: 1; }
       }
-      .animate-print {
-        animation: print-receipt 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-      }
-      @keyframes fade-in {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-      }
-      .animate-fade-in {
-        animation: fade-in 0.5s ease-out forwards;
-      }
+      .animate-print { animation: print-receipt 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+      @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+      .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "jsbarcode": "https://esm.sh/jsbarcode@^3.12.1",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "vite": "https://esm.sh/vite@^7.3.0",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
-  }
-}
-</script>
-</head>
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@^19.2.3",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "jsbarcode": "https://esm.sh/jsbarcode@^3.12.1",
+        "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+        "vite": "https://esm.sh/vite@^7.3.0",
+        "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+      }
+    }
+    </script>
+  </head>
   <body>
-    <!-- Hidden Image for WeChat Share scraping (Fallback when JSSDK is not configured) -->
-    <div style="position: absolute; width: 0; height: 0; overflow: hidden; top: 0; left: 0; z-index: -1;">
-      <img src="https://p.sda1.dev/30/95715e4c030bb436ea3cb2e380150f33/68f0097f66e974affa6042f56e82a12a.jpg" alt="WeChat Share Cover" />
+    <!-- 
+      WeChat Preview Image Fix:
+      WeChat's scraper looks for the first img tag with size > 300px.
+      Using absolute positioning and zero opacity ensures it's "visible" to the bot but not the user.
+    -->
+    <div style="position: absolute; top: -1000px; left: -1000px; width: 300px; height: 300px; overflow: hidden; opacity: 0;">
+      <img src="https://p.sda1.dev/30/95715e4c030bb436ea3cb2e380150f33/68f0097f66e974affa6042f56e82a12a.jpg" alt="WeChat Share Cover" width="300" height="300" />
     </div>
 
     <div id="root"></div>
